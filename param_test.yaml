@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  description: >-
+    API Definition for Sample Seriver
+  version: 0.1.0
+  title: My Sample Service
+servers:
+  - url: 'http://localhost:8080'
+paths:          
+  '/example/api':              
+    get:
+      operationId: getListResults
+      parameters:
+        - name: integerParam
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+            format: int32
+            default: 10
+        - name: dateParam
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: dateTimeParam
+          in: query
+          schema:
+             type: string
+             format: date-time
+        - name: requiredQueryParam
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: formatParam
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/format'
+      responses:
+        200:
+          description: response
+          content:
+            application/json:
+              schema:
+                type: string        
+  
+components:
+  schemas:
+    format:
+      default: json
+      description: response format
+      enum:
+      - json
+      - csv
+      type: string          

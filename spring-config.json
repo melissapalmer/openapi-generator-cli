@@ -1,0 +1,13 @@
+{
+	"interfaceOnly": true,
+	"modelPackage": "model",
+	"apiPackage": "api",
+	"java8": true,
+	"dateLibrary": "java8",
+	"useBeanValidation": false,
+	"delegatePattern": true,
+	"delegateMethod": true,
+	"useTags": true,
+	"singleContentTypes": false,
+	"hateoas": false
+}
