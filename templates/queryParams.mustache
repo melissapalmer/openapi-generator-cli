@@ -1,0 +1,9 @@
+// Reason for overiding this template is that LocalDate parameters are not getting the @RequestParam added parameter list of a function
+// There is already a BUG raised with `openapi-generator` at: https://github.com/OpenAPITools/openapi-generator/issues/2053 & https://github.com/OpenAPITools/openapi-generator/issues/3248
+// which pointed to the JavaSpring template being wrong https://github.com/OpenAPITools/openapi-generator/blob/63e1e0451c61d7eb5f191c54d5e68f5fb02f5994/modules/openapi-generator/src/main/resources/JavaSpring/queryParams.mustache#L1
+
+{{#isQueryParam}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}
+
+    @ApiParam(value = "{{{description}}}"{{#required}}, required = true{{/required}}{{#allowableValues}}, allowableValues = "{{#values}}{{{.}}}{{^-last}}, {{/-last}}{{#-last}}{{/-last}}{{/values}}"{{/allowableValues}}{{^isContainer}}{{#defaultValue}}, defaultValue = {{^isString}}"{{/isString}}{{#isString}}{{#isEnum}}"{{/isEnum}}{{/isString}}{{{defaultValue}}}{{^isString}}"{{/isString}}{{#isString}}{{#isEnum}}"{{/isEnum}}{{/isString}}{{/defaultValue}}{{/isContainer}}) {{#useBeanValidation}}@Valid{{/useBeanValidation}}
+    @RequestParam(value = "{{baseName}}"{{#required}}, required = true{{/required}}{{^required}}, required = false{{/required}}{{^isContainer}}{{#defaultValue}}, defaultValue={{^isString}}"{{/isString}}{{#isString}}{{#isEnum}}"{{/isEnum}}{{/isString}}{{{defaultValue}}}{{^isString}}"{{/isString}}{{#isString}}{{#isEnum}}"{{/isEnum}}{{/isString}}{{/defaultValue}}{{/isContainer}})
+    {{>optionalDataType}} {{paramName}}{{/isQueryParam}}
